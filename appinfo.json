@@ -2,12 +2,12 @@
     "versionLabel": "1.0.1",
     "uuid": "59f4321a-c061-429c-891d-67de803efcff",
     "appKeys": {},
-    "longName": "Day/Night City",
+    "longName": "Day/Night Minsk",
     "versionCode": 1,
     "capabilities": [
         ""
     ],
-    "shortName": "Day/Night City",
+    "shortName": "Day/Night Minsk",
     "companyName": "dexif",
     "watchapp": {
         "watchface": true
