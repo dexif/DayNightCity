@@ -1,5 +1,5 @@
 {
-    "versionLabel": "1.0",
+    "versionLabel": "1.0.1",
     "uuid": "59f4321a-c061-429c-891d-67de803efcff",
     "appKeys": {},
     "longName": "Day/Night City",
@@ -15,30 +15,9 @@
     "resources": {
         "media": [
             {
-                "menuIcon": true,
                 "type": "png",
-                "name": "ICON",
-                "file": "images/daynight.png"
-            },
-            {
-                "type": "png",
-                "name": "BT_DISCONNECTED_WHITE",
-                "file": "images/bt_disconnected_white.png"
-            },
-            {
-                "type": "png",
-                "name": "BT_CONNECTED_WHITE",
-                "file": "images/bt_connected_white.png"
-            },
-            {
-                "type": "png",
-                "name": "BT_CONNECTED",
-                "file": "images/bt_connected.png"
-            },
-            {
-                "type": "png",
-                "name": "BT_DISCONNECTED",
-                "file": "images/bt_disconnected.png"
+                "name": "BG_NIGHT_CITY",
+                "file": "images/NightCity.png"
             },
             {
                 "type": "png",
@@ -47,8 +26,29 @@
             },
             {
                 "type": "png",
-                "name": "BG_NIGHT_CITY",
-                "file": "images/NightCity.png"
+                "name": "BT_DISCONNECTED",
+                "file": "images/bt_disconnected.png"
+            },
+            {
+                "type": "png",
+                "name": "BT_CONNECTED",
+                "file": "images/bt_connected.png"
+            },
+            {
+                "type": "png",
+                "name": "BT_CONNECTED_WHITE",
+                "file": "images/bt_connected_white.png"
+            },
+            {
+                "type": "png",
+                "name": "BT_DISCONNECTED_WHITE",
+                "file": "images/bt_disconnected_white.png"
+            },
+            {
+                "menuIcon": true,
+                "type": "png",
+                "name": "ICON",
+                "file": "images/daynight.png"
             }
         ]
     }

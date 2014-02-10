@@ -11,6 +11,7 @@ static GBitmap *bt_connected;
 static GBitmap *bt_disconnected;
 static BitmapLayer* bt_connected_layer;
 static InverterLayer *inv_layer;
+static int day = 0;
 
 int WIDTH = 144;
 int HEIGHT = 168;
@@ -59,6 +60,8 @@ static void handle_second_tick(struct tm* tick_time, TimeUnits units_changed) {
   static char time_text[] = "00:00";
   static char date_text[] = "September 01,  1995";
   static char dp[] = "18";
+  static int old_day = 0;
+  old_day = day;
   if (clock_is_24h_style() == true){
     strftime(time_text, sizeof(time_text), "%H:%M", tick_time);
   } else {
@@ -67,29 +70,34 @@ static void handle_second_tick(struct tm* tick_time, TimeUnits units_changed) {
   strftime(date_text, sizeof(date_text), "%b %d, %G", tick_time);
   strftime(dp, sizeof(dp), "%H", tick_time);
   if (catoi(dp)>=18 || catoi(dp)<6) {
-    text_layer_set_text_color(time_layer, GColorWhite);
-    text_layer_set_text_color(date_layer, GColorBlack);
-    text_layer_set_text_color(battery_layer, GColorWhite);
-	bitmap_layer_set_background_color(City_Layer, GColorBlack);
-	bitmap_layer_set_bitmap(City_Layer, City_Night);
-    bt_disconnected = gbitmap_create_with_resource(RESOURCE_ID_BT_DISCONNECTED);
-    bt_connected = gbitmap_create_with_resource(RESOURCE_ID_BT_CONNECTED);
-  } else {
-    text_layer_set_text_color(time_layer, GColorBlack);
-    text_layer_set_text_color(date_layer, GColorWhite); 
-    text_layer_set_text_color(battery_layer, GColorBlack);
-	bitmap_layer_set_background_color(City_Layer, GColorWhite);
-	bitmap_layer_set_bitmap(City_Layer, City_Day);
-    bt_disconnected = gbitmap_create_with_resource(RESOURCE_ID_BT_DISCONNECTED_WHITE);
-    bt_connected = gbitmap_create_with_resource(RESOURCE_ID_BT_CONNECTED_WHITE);
+	  day=0;
+  }else{
+	  day=1;
   }
-
+  if(day != old_day){
+	  if (day == 0) {
+		text_layer_set_text_color(time_layer, GColorWhite);
+		text_layer_set_text_color(date_layer, GColorBlack);
+		text_layer_set_text_color(battery_layer, GColorWhite);
+		bitmap_layer_set_background_color(City_Layer, GColorBlack);
+		bitmap_layer_set_bitmap(City_Layer, City_Night);
+		bt_disconnected = gbitmap_create_with_resource(RESOURCE_ID_BT_DISCONNECTED);
+		bt_connected = gbitmap_create_with_resource(RESOURCE_ID_BT_CONNECTED);
+	  } else {
+		text_layer_set_text_color(time_layer, GColorBlack);
+		text_layer_set_text_color(date_layer, GColorWhite); 
+		text_layer_set_text_color(battery_layer, GColorBlack);
+		bitmap_layer_set_background_color(City_Layer, GColorWhite);
+		bitmap_layer_set_bitmap(City_Layer, City_Day);
+		bt_disconnected = gbitmap_create_with_resource(RESOURCE_ID_BT_DISCONNECTED_WHITE);
+		bt_connected = gbitmap_create_with_resource(RESOURCE_ID_BT_CONNECTED_WHITE);
+	  }
+	  handle_bluetooth(bluetooth_connection_service_peek());
+  }
   
   text_layer_set_text(time_layer, time_text);
   text_layer_set_text(date_layer, date_text);
-
   handle_battery(battery_state_service_peek());
-  handle_bluetooth(bluetooth_connection_service_peek());
 }
 
 static void do_init(void) {
